@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2024 at 04:46 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- Generation Time: Feb 22, 2024 at 08:15 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,17 +31,18 @@ CREATE TABLE `deductions` (
   `deduction_id` int(5) NOT NULL,
   `deduction_name` varchar(100) NOT NULL,
   `deduction_amount` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `deductions`
 --
 
 INSERT INTO `deductions` (`deduction_id`, `deduction_name`, `deduction_amount`) VALUES
-(1, 'philhealth', 600),
-(2, 'BIR', 200),
-(3, 'GSIS', 150),
-(4, 'PAGIBIG', 300);
+(1, 'philhealth', 350),
+(2, 'BIR', 500),
+(3, 'GSIS', 630),
+(4, 'PAGIBIG', 140),
+(5, 'SSS', 980);
 
 -- --------------------------------------------------------
 
@@ -52,7 +53,7 @@ INSERT INTO `deductions` (`deduction_id`, `deduction_name`, `deduction_amount`) 
 CREATE TABLE `department` (
   `dept_id` int(11) NOT NULL,
   `dept_name` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `department`
@@ -80,21 +81,38 @@ CREATE TABLE `employee` (
   `email` varchar(100) NOT NULL,
   `dept` int(30) NOT NULL,
   `deduction` int(10) NOT NULL,
-  `overtime` int(10) NOT NULL,
-  `bonus` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `overtime_hours` int(10) NOT NULL,
+  `bonus` int(10) NOT NULL,
+  `total_gross_pay` int(100) NOT NULL,
+  `total_net_pay` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`emp_id`, `lname`, `fname`, `gender`, `email`, `dept`, `deduction`, `overtime`, `bonus`) VALUES
-(6, 'Sabit', 'Colins', 'Male', 'test@gmail.com', 2, 600, 2, 200),
-(8, 'Pasadas', 'Renz', 'Male', 'test@gmail.com', 8, 600, 3, 5000),
-(9, 'Maglangit', 'Karen', 'Female', 'test@gmail.com', 7, 650, 6, 2000),
-(10, 'umar', 'daraz', 'Male', 'test@gmail.com', 8, 300, 2, 500),
-(11, 'Leonida', 'Fritzie Apple', 'Male', 'leonida@gmail.com', 2, 950, 3, 50),
-(13, 'Corpuz', 'Allan', 'Male', 'corpuz@gmail.com', 10, 900, 3, 500);
+INSERT INTO `employee` (`emp_id`, `lname`, `fname`, `gender`, `email`, `dept`, `deduction`, `overtime_hours`, `bonus`, `total_gross_pay`, `total_net_pay`) VALUES
+(6, 'Sabit', 'Jessa', 'Female', 'sabit@gmail.com', 7, 600, 2, 200, 7800, 7200),
+(8, 'Pasadas', 'Renz', 'Male', 'pasadas@gmail.com', 10, 600, 3, 5000, 12900, 12300),
+(9, 'Maglangit', 'Karen', 'Female', 'maglangit@gmail.com', 11, 650, 6, 2000, 10800, 10150),
+(11, 'Leonida', 'Fritzie Apple', 'Male', 'leonida@gmail.com', 2, 950, 3, 50, 7950, 7000),
+(13, 'Corpuz', 'Allan', 'Male', 'corpuz@gmail.com', 10, 1820, 4, 600, 8800, 6980),
+(14, 'Bueno', 'Kyll John', 'Male', 'bueno@gmail.com', 2, 900, 7, 400, 9500, 8600),
+(15, 'Albarracin', 'Brent', 'Male', 'albarracin@gmail.com', 10, 1170, 1, 1000, 8300, 7130),
+(17, 'Rivera', 'Vincent Ace', 'Male', 'ace@gmail.com', 9, 1250, 3, 600, 8500, 7250),
+(18, 'Cardo', 'Dalisay', 'Male', 'CardoDali@gmail.com', 2, 1820, 2, 200, 7800, 5980),
+(19, 'Sy', 'Leisha', 'Female', 'Leishy@gmail.com', 10, 1820, 3, 500, 8400, 6580),
+(20, 'Hens', 'Kelra', 'Male', 'KelraHel@gmail.com', 8, 1820, 6, 800, 9600, 7780),
+(21, 'Max', 'Lisha', 'Female', 'Lishamax@gmail.com', 2, 1820, 3, 500, 8400, 6580),
+(22, 'Pacquaio', 'Manny', 'Male', 'pacman@gmail.com', 2, 1170, 3, 300, 8200, 7030),
+(23, 'Tate', 'Lesley', 'Female', 'LesleyTate@gmail.com', 11, 1370, 4, 600, 8800, 7430),
+(24, 'Donut', 'Boi', 'Male', 'Nadonut@gmail.com', 8, 870, 3, 500, 8400, 7530),
+(25, 'Lazada', 'Renz', 'Male', 'renzshopping@gmail.com', 8, 1820, 1, 300, 7600, 5780),
+(26, 'Genie', 'Ryan', 'Male', 'Ryan18@gmail.com', 2, 1820, 7, 1500, 10600, 8780),
+(27, 'Corn', 'Dog', 'Other', 'corndog@gmail.com', 10, 1470, 3, 700, 8600, 7130),
+(28, 'Rojin', 'Carl', 'Male', 'carlrojin@gmail.com', 11, 1820, 8, 2500, 11900, 10080),
+(29, 'Escabas', 'Arjay', 'Male', 'escabas@gmail.com', 9, 1820, 7, 2000, 11100, 9280),
+(31, 'Pacalna', 'Asnari', 'Male', 'pacalna@gmail.com', 9, 1470, 6, 1000, 9800, 8330);
 
 -- --------------------------------------------------------
 
@@ -106,14 +124,14 @@ CREATE TABLE `overtime` (
   `ot_id` int(10) NOT NULL,
   `rate` int(10) NOT NULL,
   `none` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `overtime`
 --
 
 INSERT INTO `overtime` (`ot_id`, `rate`, `none`) VALUES
-(1, 200, 0);
+(1, 300, 0);
 
 -- --------------------------------------------------------
 
@@ -125,14 +143,14 @@ CREATE TABLE `salary` (
   `salary_id` int(10) NOT NULL,
   `salary_rate` int(10) NOT NULL,
   `none` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `salary`
 --
 
 INSERT INTO `salary` (`salary_id`, `salary_rate`, `none`) VALUES
-(1, 5000, 0);
+(1, 7000, 0);
 
 -- --------------------------------------------------------
 
@@ -144,14 +162,14 @@ CREATE TABLE `user` (
   `id` int(5) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`) VALUES
-(1, 'Colins', 'sabit'),
+(1, 'ace', '12345'),
 (2, 'admin', 'admin');
 
 --
@@ -203,19 +221,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `deductions`
 --
 ALTER TABLE `deductions`
-  MODIFY `deduction_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `deduction_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `emp_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `emp_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `overtime`
