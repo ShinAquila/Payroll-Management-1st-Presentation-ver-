@@ -16,14 +16,14 @@ if (isset($_POST['submit']) != "") {
     ?>
     <script>
       alert('Employee had been successfully added.');
-      window.location.href = 'home_employee.php?page=emp_list';
+      window.location.href = '../home/home_employee.php?page=emp_list';
     </script>
     <?php
   } else {
     ?>
     <script>
       alert('Invalid.');
-      window.location.href = 'index.php';
+      window.location.href = '../index.php';
     </script>
     <?php
   }

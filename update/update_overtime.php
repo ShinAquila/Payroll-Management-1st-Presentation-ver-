@@ -1,6 +1,6 @@
 <?php
 	
-		require("db.php");
+		require("../db.php");
 		
 		@$id 			= $_POST['ot_id'];
 		@$salary		= $_POST['rate'];
@@ -13,7 +13,7 @@
 			?>
 		        <script>
 		            alert('Salary rate successfully changed...');
-		            window.location.href='home_salary.php';
+		            window.location.href='../home/home_salary.php';
 		        </script>
 		    <?php 
 		}

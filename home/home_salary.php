@@ -1,5 +1,5 @@
 <?php
-include("auth.php"); //include auth.php file on all secure pages
+include("../auth.php"); //include auth.php file on all secure pages
 
 ?>
 
@@ -27,12 +27,10 @@ while ($row = mysqli_fetch_array($query)) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Pixel Foundry - Salary</title>
-  <link href="assets/css/justified-nav.css" rel="stylesheet">
-
-
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/css/search.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="assets/css/dataTables.min.css">
+  <link href="../assets/css/justified-nav.css" rel="stylesheet">
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/search.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../assets/css/dataTables.min.css">
 
 </head>
 
@@ -41,8 +39,13 @@ while ($row = mysqli_fetch_array($query)) {
   <div class="container">
     <div class="masthead">
       <h3>
-        Pixel Foundry<br><br>
-        <b><a href="index.php">Home</a></b>
+        <b>Pixel Foundry</b><br>
+        Welcome
+        <?php echo $_SESSION['username']; ?>!<br><br>
+        <b><a href="../index.php">Home</a></b>
+        <a data-toggle="modal" href="#colins" class="pull-right"><b>
+            Logout
+          </b></a>
       </h3>
       <nav>
         <ul class="nav nav-justified">
@@ -203,7 +206,7 @@ while ($row = mysqli_fetch_array($query)) {
           </div>
           <div class="modal-body" style="padding:40px 50px;">
 
-            <form class="form-horizontal" action="update_overtime.php" name="form" method="post">
+            <form class="form-horizontal" action="../update/update_overtime.php" name="form" method="post">
               <div class="form-group">
                 <input type="text" name="rate" class="form-control" value="<?php echo $rate; ?>" required="required">
               </div>
@@ -230,7 +233,7 @@ while ($row = mysqli_fetch_array($query)) {
           </div>
           <div class="modal-body" style="padding:40px 50px;">
 
-            <form class="form-horizontal" action="update_salary.php" name="form" method="post">
+            <form class="form-horizontal" action="../update/update_salary.php" name="form" method="post">
               <div class="form-group">
                 <input type="text" name="salary_rate" class="form-control" value="<?php echo $salary; ?>"
                   required="required">
@@ -260,7 +263,7 @@ while ($row = mysqli_fetch_array($query)) {
           </div>
           <div class="modal-body" style="padding:40px 50px;">
             <div align="center">
-              <a href="logout.php" class="btn btn-block btn-danger">Logout</a>
+              <a href="../logout.php" class="btn btn-block btn-danger">Logout</a>
             </div>
           </div>
         </div>
@@ -272,11 +275,10 @@ while ($row = mysqli_fetch_array($query)) {
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <!-- <script src="assets/js/docs.min.js"></script> -->
-  <script src="assets/js/search.js"></script>
-  <script type="text/javascript" charset="utf-8" language="javascript" src="assets/js/dataTables.min.js"></script>
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../assets/js/search.js"></script>
+  <script type="text/javascript" charset="utf-8" language="javascript" src="../assets/js/dataTables.min.js"></script>
 
   <!-- FOR DataTable -->
   <script>

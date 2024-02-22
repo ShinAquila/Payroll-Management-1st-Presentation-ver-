@@ -1,6 +1,6 @@
 <?php
-include("auth.php"); //include auth.php file on all secure pages
-include("add_employee.php");
+include("../auth.php"); //include auth.php file on all secure pages
+include("../add/add_employee.php");
 ?>
 
 <?php
@@ -53,10 +53,10 @@ while ($row = mysqli_fetch_array($query5)) {
 
   <title>Pixel Foundry - Deductions</title>
 
-  <link href="assets/css/justified-nav.css" rel="stylesheet">
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/css/search.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="assets/css/dataTables.min.css">
+  <link href="../assets/css/justified-nav.css" rel="stylesheet">
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/search.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../assets/css/dataTables.min.css">
 
 </head>
 
@@ -65,8 +65,13 @@ while ($row = mysqli_fetch_array($query5)) {
   <div class="container">
     <div class="masthead">
       <h3>
-        Pixel Foundry<br><br>
+        <b>Pixel Foundry</b><br>
+        Welcome
+        <?php echo $_SESSION['username']; ?>!<br><br>
         <b><a href="../index.php">Home</a></b>
+        <a data-toggle="modal" href="#colins" class="pull-right"><b>
+            Logout
+          </b></a>
       </h3>
       <nav>
         <ul class="nav nav-justified">
@@ -198,7 +203,7 @@ while ($row = mysqli_fetch_array($query5)) {
           </div>
           <div class="modal-body" style="padding:40px 50px;">
             <div align="center">
-              <a href="logout.php" class="btn btn-block btn-danger">Logout</a>
+              <a href="../logout.php" class="btn btn-block btn-danger">Logout</a>
             </div>
           </div>
         </div>
@@ -210,11 +215,11 @@ while ($row = mysqli_fetch_array($query5)) {
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
   <!-- <script src="assets/js/docs.min.js"></script> -->
-  <script src="assets/js/search.js"></script>
-  <script type="text/javascript" charset="utf-8" language="javascript" src="assets/js/dataTables.min.js"></script>
+  <script src="../assets/js/search.js"></script>
+  <script type="text/javascript" charset="utf-8" language="javascript" src="../assets/js/dataTables.min.js"></script>
 
   <!-- FOR DataTable -->
   <script>

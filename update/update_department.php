@@ -1,7 +1,7 @@
 <?php
 
-include("db.php");
-include("auth.php");
+include("../db.php");
+include("../auth.php");
 
 $id = $_POST['id'];
 $dept_name = $_POST['dept_name'];
@@ -12,14 +12,14 @@ if ($sql) {
     ?>
     <script>
         alert('Department successfully updated.');
-        window.location.href = 'home_departments.php';
+        window.location.href = '../home/home_departments.php';
     </script>
     <?php
 } else {
     ?>
     <script>
         alert('Invalid action.');
-        window.location.href = 'home_departments.php';
+        window.location.href = '../home/home_departments.php';
     </script>
     <?php
 }

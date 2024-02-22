@@ -1,6 +1,6 @@
 <?php
-include("db.php"); //include auth.php file on all secure pages
-include("auth.php");
+include("../db.php"); //include auth.php file on all secure pages
+include("../auth.php");
 
 $conn = mysqli_connect('localhost', 'root', '', 'payroll');
 if (!$conn) {
@@ -30,6 +30,12 @@ while ($row = mysqli_fetch_array($query4)) {
   $id = $row['deduction_id'];
   $PAGIBIG = $row['deduction_amount'];
 }
+
+$query5 = mysqli_query($conn, "SELECT * from deductions WHERE deduction_id = 5");
+while ($row = mysqli_fetch_array($query5)) {
+  $id = $row['deduction_id'];
+  $SSS = $row['deduction_amount'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -41,21 +47,14 @@ while ($row = mysqli_fetch_array($query4)) {
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description"
-    content="Bootstrap, a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.">
-  <meta name="keywords" content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 
   <title>Pixel Foundry - View Account</title>
-  <link href="assets/css/justified-nav.css" rel="stylesheet">
+  <link href="../assets/css/justified-nav.css" rel="stylesheet">
 
 
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-  <!-- <link href="data:text/css;charset=utf-8," data-href="assets/css/bootstrap-theme.min.css" rel="stylesheet" id="bs-theme-stylesheet"> -->
-  <!-- <link href="assets/css/docs.min.css" rel="stylesheet"> -->
-  <link href="assets/css/search.css" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="assets/css/styles.css" /> -->
-  <link rel="stylesheet" type="text/css" href="assets/css/dataTables.min.css">
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/search.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../assets/css/dataTables.min.css">
 
 </head>
 
@@ -64,7 +63,7 @@ while ($row = mysqli_fetch_array($query4)) {
   <div class="container">
     <div class="masthead">
       <h3>
-        <b><a href="index.php">Payroll and Management System</a></b>
+        <b><a href="../index.php">Payroll and Management System</a></b>
         <a data-toggle="modal" href="#colins" class="pull-right"><b>Admin</b></a>
       </h3>
       <nav>
@@ -73,13 +72,13 @@ while ($row = mysqli_fetch_array($query4)) {
             <a href="">Employee</a>
           </li>
           <li>
-            <a href="home_departments.php">Department</a>
+            <a href="../home/home_departments.php">Department</a>
           </li>
           <li>
-            <a href="home_deductions.php">Deduction</a>
+            <a href="../home/home_deductions.php">Deduction</a>
           </li>
           <li>
-            <a href="home_salary.php">Income</a>
+            <a href="../home/home_salary.php">Income</a>
           </li>
         </ul>
       </nav>
@@ -113,7 +112,7 @@ while ($row = mysqli_fetch_array($query4)) {
       $netpay = $income - $deduction;
       ?>
 
-      <form class="form-horizontal" action="update_account.php" method="post" name="form">
+      <form class="form-horizontal" action="../update/update_account.php" method="post" name="form">
         <input type="hidden" name="new" value="1" />
         <input name="id" type="hidden" value="<?php echo $row['emp_id']; ?>" />
         <div class="form-group">
@@ -152,6 +151,12 @@ while ($row = mysqli_fetch_array($query4)) {
                      echo "checked"; ?>>
               <label class="form-check-label" for="deduction_pagibig">PAG-IBIG</label>
             </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="deduction[]"
+                value="<?php echo $SSS; ?>" <?php if ($SSS > 0)
+                     echo "checked"; ?>>
+              <label class="form-check-label" for="deduction_pagibig">SSS</label>
+            </div>
           </div>
         </div>
         <div class="form-group">
@@ -178,7 +183,7 @@ while ($row = mysqli_fetch_array($query4)) {
           <label class="col-sm-5 control-label"></label>
           <div class="col-sm-4">
             <input type="submit" name="submit" value="Update" class="btn btn-danger">
-            <a href="home_employee.php" class="btn btn-primary">Cancel</a>
+            <a href="../home/home_employee.php" class="btn btn-primary">Cancel</a>
           </div>
         </div>
       </form>
@@ -200,7 +205,7 @@ while ($row = mysqli_fetch_array($query4)) {
           </div>
           <div class="modal-body" style="padding:40px 50px;">
             <div align="center">
-              <a href="logout.php" class="btn btn-block btn-danger">Logout</a>
+              <a href="../logout.php" class="btn btn-block btn-danger">Logout</a>
             </div>
           </div>
         </div>
@@ -212,11 +217,10 @@ while ($row = mysqli_fetch_array($query4)) {
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <!-- <script src="assets/js/docs.min.js"></script> -->
-  <script src="assets/js/search.js"></script>
-  <script type="text/javascript" charset="utf-8" language="javascript" src="assets/js/dataTables.min.js"></script>
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../assets/js/search.js"></script>
+  <script type="text/javascript" charset="utf-8" language="javascript" src="../assets/js/dataTables.min.js"></script>
 
   <!-- FOR DataTable -->
   <script>

@@ -1,6 +1,6 @@
 <?php
-include("auth.php"); //include auth.php file on all secure pages
-include("add_department.php");
+include("../auth.php"); //include auth.php file on all secure pages
+include("../add/add_department.php");
 
 $sql = mysqli_query($conn, "SELECT * from department");
 while ($row = mysqli_fetch_array($sql)) {
@@ -17,22 +17,12 @@ while ($row = mysqli_fetch_array($sql)) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Bootstrap, a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.">
-    <meta name="keywords"
-        content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 
     <title>Pixel Foundry - Department</title>
-    <link href="assets/css/justified-nav.css" rel="stylesheet">
-
-
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link href="data:text/css;charset=utf-8," data-href="assets/css/bootstrap-theme.min.css" rel="stylesheet" id="bs-theme-stylesheet"> -->
-    <!-- <link href="assets/css/docs.min.css" rel="stylesheet"> -->
-    <link href="assets/css/search.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="assets/css/styles.css" /> -->
-    <link rel="stylesheet" type="text/css" href="assets/css/dataTables.min.css">
+    <link href="../assets/css/justified-nav.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/search.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/css/dataTables.min.css">
 
 </head>
 
@@ -41,8 +31,13 @@ while ($row = mysqli_fetch_array($sql)) {
     <div class="container">
         <div class="masthead">
             <h3>
-                <b><a href="index.php">Pixel Foundry</a></b>
-                <a data-toggle="modal" href="#colins" class="pull-right"><b>Admin</b></a>
+                <b>Pixel Foundry</b><br>
+                Welcome
+                <?php echo $_SESSION['username']; ?>!<br><br>
+                <b><a href="../index.php">Home</a></b>
+                <a data-toggle="modal" href="#colins" class="pull-right"><b>
+                        Logout
+                    </b></a>
             </h3>
             <nav>
                 <ul class="nav nav-justified">
@@ -101,16 +96,16 @@ while ($row = mysqli_fetch_array($sql)) {
 
                                         <tr>
                                             <td align="center"><a
-                                                    href="view_department.php?dept_id=<?php echo $row["dept_id"]; ?>"
+                                                    href="../view/view_department.php?dept_id=<?php echo $row["dept_id"]; ?>"
                                                     title="Update">
                                                     <?php echo $row['dept_name'] ?>
                                                 </a></td>
 
                                             <td align="center">
                                                 <a class="btn btn-primary"
-                                                    href="view_department.php?dept_id=<?php echo $row["dept_id"]; ?>">Edit</a>
+                                                    href="../view/view_department.php?dept_id=<?php echo $row["dept_id"]; ?>">Edit</a>
                                                 <a class="btn btn-danger"
-                                                    href="delete_department.php?dept_id=<?php echo $row["dept_id"]; ?>">Delete</a>
+                                                    href="../delete/delete_department.php?dept_id=<?php echo $row["dept_id"]; ?>">Delete</a>
                                             </td>
                                         </tr>
 
@@ -181,7 +176,7 @@ while ($row = mysqli_fetch_array($sql)) {
                     </div>
                     <div class="modal-body" style="padding:40px 50px;">
                         <div align="center">
-                            <a href="logout.php" class="btn btn-block btn-danger">Logout</a>
+                            <a href="../logout.php" class="btn btn-block btn-danger">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -193,11 +188,10 @@ while ($row = mysqli_fetch_array($sql)) {
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <!-- <script src="assets/js/docs.min.js"></script> -->
-    <script src="assets/js/search.js"></script>
-    <script type="text/javascript" charset="utf-8" language="javascript" src="assets/js/dataTables.min.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/search.js"></script>
+    <script type="text/javascript" charset="utf-8" language="javascript" src="../assets/js/dataTables.min.js"></script>
 
     <!-- FOR DataTable -->
     <script>

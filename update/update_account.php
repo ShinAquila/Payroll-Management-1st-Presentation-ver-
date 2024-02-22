@@ -1,7 +1,7 @@
 <?php
 
-include("db.php");
-include("auth.php");
+include("../db.php");
+include("../auth.php");
 
 $id = $_POST['id'];
 $deduction_sum = 0;
@@ -20,7 +20,7 @@ if ($sql) {
   ?>
   <script>
     alert('Account successfully updated.');
-    window.location.href = 'home_employee.php';
+    window.location.href = '../home/home_employee.php';
   </script>
   <?php
 } else {

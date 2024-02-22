@@ -1,7 +1,7 @@
 <?php
 
-include("db.php");
-include("auth.php");
+include("../db.php");
+include("../auth.php");
 
 // Retrieve data from POST
 $id = $_POST['id'];
@@ -17,7 +17,7 @@ if ($sql) {
   ?>
   <script>
     alert('Employee successfully updated.');
-    window.location.href = 'home_employee.php';
+    window.location.href = '../home/home_employee.php';
   </script>
   <?php
 } else {
