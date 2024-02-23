@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2024 at 08:15 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Feb 23, 2024 at 04:53 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,18 +31,18 @@ CREATE TABLE `deductions` (
   `deduction_id` int(5) NOT NULL,
   `deduction_name` varchar(100) NOT NULL,
   `deduction_amount` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `deductions`
 --
 
 INSERT INTO `deductions` (`deduction_id`, `deduction_name`, `deduction_amount`) VALUES
-(1, 'philhealth', 350),
+(1, 'philhealth', 450),
 (2, 'BIR', 500),
-(3, 'GSIS', 630),
-(4, 'PAGIBIG', 140),
-(5, 'SSS', 980);
+(3, 'GSIS', 810),
+(4, 'PAGIBIG', 180),
+(5, 'SSS', 1260);
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ INSERT INTO `deductions` (`deduction_id`, `deduction_name`, `deduction_amount`) 
 CREATE TABLE `department` (
   `dept_id` int(11) NOT NULL,
   `dept_name` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `department`
@@ -85,34 +85,33 @@ CREATE TABLE `employee` (
   `bonus` int(10) NOT NULL,
   `total_gross_pay` int(100) NOT NULL,
   `total_net_pay` int(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`emp_id`, `lname`, `fname`, `gender`, `email`, `dept`, `deduction`, `overtime_hours`, `bonus`, `total_gross_pay`, `total_net_pay`) VALUES
-(6, 'Sabit', 'Jessa', 'Female', 'sabit@gmail.com', 7, 600, 2, 200, 7800, 7200),
-(8, 'Pasadas', 'Renz', 'Male', 'pasadas@gmail.com', 10, 600, 3, 5000, 12900, 12300),
-(9, 'Maglangit', 'Karen', 'Female', 'maglangit@gmail.com', 11, 650, 6, 2000, 10800, 10150),
-(11, 'Leonida', 'Fritzie Apple', 'Male', 'leonida@gmail.com', 2, 950, 3, 50, 7950, 7000),
-(13, 'Corpuz', 'Allan', 'Male', 'corpuz@gmail.com', 10, 1820, 4, 600, 8800, 6980),
-(14, 'Bueno', 'Kyll John', 'Male', 'bueno@gmail.com', 2, 900, 7, 400, 9500, 8600),
-(15, 'Albarracin', 'Brent', 'Male', 'albarracin@gmail.com', 10, 1170, 1, 1000, 8300, 7130),
-(17, 'Rivera', 'Vincent Ace', 'Male', 'ace@gmail.com', 9, 1250, 3, 600, 8500, 7250),
-(18, 'Cardo', 'Dalisay', 'Male', 'CardoDali@gmail.com', 2, 1820, 2, 200, 7800, 5980),
-(19, 'Sy', 'Leisha', 'Female', 'Leishy@gmail.com', 10, 1820, 3, 500, 8400, 6580),
-(20, 'Hens', 'Kelra', 'Male', 'KelraHel@gmail.com', 8, 1820, 6, 800, 9600, 7780),
-(21, 'Max', 'Lisha', 'Female', 'Lishamax@gmail.com', 2, 1820, 3, 500, 8400, 6580),
-(22, 'Pacquaio', 'Manny', 'Male', 'pacman@gmail.com', 2, 1170, 3, 300, 8200, 7030),
-(23, 'Tate', 'Lesley', 'Female', 'LesleyTate@gmail.com', 11, 1370, 4, 600, 8800, 7430),
-(24, 'Donut', 'Boi', 'Male', 'Nadonut@gmail.com', 8, 870, 3, 500, 8400, 7530),
-(25, 'Lazada', 'Renz', 'Male', 'renzshopping@gmail.com', 8, 1820, 1, 300, 7600, 5780),
-(26, 'Genie', 'Ryan', 'Male', 'Ryan18@gmail.com', 2, 1820, 7, 1500, 10600, 8780),
-(27, 'Corn', 'Dog', 'Other', 'corndog@gmail.com', 10, 1470, 3, 700, 8600, 7130),
-(28, 'Rojin', 'Carl', 'Male', 'carlrojin@gmail.com', 11, 1820, 8, 2500, 11900, 10080),
-(29, 'Escabas', 'Arjay', 'Male', 'escabas@gmail.com', 9, 1820, 7, 2000, 11100, 9280),
-(31, 'Pacalna', 'Asnari', 'Male', 'pacalna@gmail.com', 9, 1470, 6, 1000, 9800, 8330);
+(6, 'Sabit', 'Jessa', 'Female', 'sabit@gmail.com', 7, 600, 2, 200, 9800, 9200),
+(8, 'Pasadas', 'Renz', 'Male', 'pasadas@gmail.com', 10, 600, 3, 5000, 14900, 14300),
+(9, 'Maglangit', 'Karen', 'Female', 'maglangit@gmail.com', 11, 650, 6, 2000, 12800, 12150),
+(11, 'Leonida', 'Fritzie Apple', 'Male', 'leonida@gmail.com', 2, 950, 3, 50, 9950, 9000),
+(13, 'Corpuz', 'Allan', 'Male', 'corpuz@gmail.com', 10, 1820, 4, 600, 10800, 8980),
+(14, 'Bueno', 'Kyll John', 'Male', 'bueno@gmail.com', 2, 900, 7, 400, 11500, 10600),
+(15, 'Albarracin', 'Brent', 'Male', 'albarracin@gmail.com', 10, 1170, 1, 1000, 10300, 9130),
+(17, 'Rivera', 'Vincent Ace', 'Male', 'ace@gmail.com', 9, 1250, 3, 600, 10500, 9250),
+(18, 'Cardo', 'Dalisay', 'Male', 'CardoDali@gmail.com', 2, 1820, 2, 200, 9800, 7980),
+(19, 'Sy', 'Leisha', 'Female', 'Leishy@gmail.com', 10, 1820, 3, 500, 10400, 8580),
+(20, 'Hens', 'Kelra', 'Male', 'KelraHel@gmail.com', 8, 1820, 6, 800, 11600, 9780),
+(21, 'Max', 'Lisha', 'Female', 'Lishamax@gmail.com', 2, 1820, 3, 500, 10400, 8580),
+(22, 'Pacquaio', 'Manny', 'Male', 'pacman@gmail.com', 2, 1170, 3, 300, 10200, 9030),
+(23, 'Tate', 'Lesley', 'Female', 'LesleyTate@gmail.com', 11, 1370, 4, 600, 10800, 9430),
+(24, 'Donut', 'Boi', 'Male', 'Nadonut@gmail.com', 8, 870, 3, 500, 10400, 9530),
+(25, 'Lazada', 'Renz', 'Male', 'renzshopping@gmail.com', 8, 1820, 1, 300, 9600, 7780),
+(27, 'Corn', 'Dog', 'Other', 'corndog@gmail.com', 10, 1470, 3, 700, 10600, 9130),
+(28, 'Rojin', 'Carl', 'Male', 'carlrojin@gmail.com', 11, 1820, 8, 2500, 13900, 12080),
+(29, 'Hoshino', 'Ai', 'Female', 'hoshino@gmail.com', 2, 1820, 7, 2000, 13100, 11280),
+(31, 'Penduko', 'Pedro', 'Male', 'penduko@gmail.com', 8, 1470, 6, 1000, 11800, 10330);
 
 -- --------------------------------------------------------
 
@@ -124,7 +123,7 @@ CREATE TABLE `overtime` (
   `ot_id` int(10) NOT NULL,
   `rate` int(10) NOT NULL,
   `none` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `overtime`
@@ -143,14 +142,14 @@ CREATE TABLE `salary` (
   `salary_id` int(10) NOT NULL,
   `salary_rate` int(10) NOT NULL,
   `none` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `salary`
 --
 
 INSERT INTO `salary` (`salary_id`, `salary_rate`, `none`) VALUES
-(1, 7000, 0);
+(1, 9000, 0);
 
 -- --------------------------------------------------------
 
@@ -162,7 +161,7 @@ CREATE TABLE `user` (
   `id` int(5) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
