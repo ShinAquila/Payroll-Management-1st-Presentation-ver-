@@ -70,8 +70,7 @@ while ($row = mysqli_fetch_array($query)) {
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#"><b>Pixel Foundry</b></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -149,10 +148,10 @@ while ($row = mysqli_fetch_array($query)) {
                       <p align="center">Bonus</p>
                     </th>
                     <th>
-                      <p align="center">Deductions</p>
+                      <p align="center">Gross Pay</p>
                     </th>
                     <th>
-                      <p align="center">Gross Pay</p>
+                      <p align="center">Deductions</p>
                     </th>
                     <th>
                       <p align="center">Net Pay</p>
@@ -182,7 +181,7 @@ while ($row = mysqli_fetch_array($query)) {
                     $total_net_pay = $row['total_net_pay'];
                     $start_pay_period = $row['start_pay_period'];
                     $end_pay_period = $row['end_pay_period'];
-                    ?>
+                  ?>
 
                     <tr>
                       <td align="center">
@@ -208,12 +207,12 @@ while ($row = mysqli_fetch_array($query)) {
                         </a>
                       </td>
                       <td align="center"><b>
-                          <?php echo $benefits_deduction ?>
+                          <?php echo $total_gross_pay ?>
                         </b><small>.00</small>
                         </a>
                       </td>
                       <td align="center"><b>
-                          <?php echo $total_gross_pay ?>
+                          <?php echo $benefits_deduction ?>
                         </b><small>.00</small>
                         </a>
                       </td>
@@ -223,10 +222,8 @@ while ($row = mysqli_fetch_array($query)) {
                         </a>
                       </td>
                       <td align="center">
-                        <a class="btn btn-primary"
-                          href="../view/view_account.php?acc_info_id=<?php echo $row["acc_info_id"]; ?>">Edit</a>
-                        <a class="btn btn-danger"
-                          href="../delete/delete_income.php?dept_id=<?php echo $row["acc_info_id"]; ?>">Delete</a>
+                        <a class="btn btn-primary" href="../view/view_account.php?acc_info_id=<?php echo $row["acc_info_id"]; ?>">Edit</a>
+                        <a class="btn btn-danger" href="../delete/delete_income.php?dept_id=<?php echo $row["acc_info_id"]; ?>">Delete</a>
                       </td>
                     </tr>
 
@@ -250,10 +247,10 @@ while ($row = mysqli_fetch_array($query)) {
                     <p align="center">Bonus</p>
                   </th>
                   <th>
-                    <p align="center">Deductions</p>
+                    <p align="center">Gross Pay</p>
                   </th>
                   <th>
-                    <p align="center">Gross Pay</p>
+                    <p align="center">Deductions</p>
                   </th>
                   <th>
                     <p align="center">Net Pay</p>
@@ -311,22 +308,19 @@ while ($row = mysqli_fetch_array($query)) {
               <div class="form-group">
                 <label class="col-sm-4 control-label">Start Pay Period</label>
                 <div class="col-sm-8">
-                  <input type="date" name="start_pay_period" class="form-control" placeholder="Start Pay Period"
-                    required="required">
+                  <input type="date" name="start_pay_period" class="form-control" placeholder="Start Pay Period" required="required">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-4 control-label">End Pay Period</label>
                 <div class="col-sm-8">
-                  <input type="date" name="end_pay_period" class="form-control" placeholder="End Pay Period"
-                    required="required">
+                  <input type="date" name="end_pay_period" class="form-control" placeholder="End Pay Period" required="required">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-4 control-label">Overtime Hours</label>
                 <div class="col-sm-8">
-                  <input type="text" name="overtime_hours" class="form-control" placeholder="Overtime Hours"
-                    required="required">
+                  <input type="text" name="overtime_hours" class="form-control" placeholder="Overtime Hours" required="required">
                 </div>
               </div>
               <div class="form-group">
@@ -391,8 +385,7 @@ while ($row = mysqli_fetch_array($query)) {
 
             <form class="form-horizontal" action="../update/update_salary.php" name="form" method="post">
               <div class="form-group">
-                <input type="text" name="salary_rate" class="form-control" value="<?php echo $salary; ?>"
-                  required="required">
+                <input type="text" name="salary_rate" class="form-control" value="<?php echo $salary; ?>" required="required">
               </div>
 
               <div class="form-group">
@@ -439,7 +432,7 @@ while ($row = mysqli_fetch_array($query)) {
   <!-- FOR DataTable -->
   <script>
     {
-      $(document).ready(function () {
+      $(document).ready(function() {
         $('#myTable').DataTable();
       });
     }
@@ -447,8 +440,8 @@ while ($row = mysqli_fetch_array($query)) {
 
   <!-- this function is for modal -->
   <script>
-    $(document).ready(function () {
-      $("#myBtn").click(function () {
+    $(document).ready(function() {
+      $("#myBtn").click(function() {
         $("#myModal").modal();
       });
     });

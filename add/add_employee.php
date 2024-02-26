@@ -10,7 +10,7 @@ if (isset($_POST['submit']) != "") {
   $email = $_POST['email'];
   $selected_dept_id = $_POST['department'];
 
-  $sql = mysqli_query($conn, "INSERT into employee(lname, fname, gender, email, dept, deduction, overtime_hours, bonus, total_gross_pay, total_net_pay)VALUES('$lname','$fname','$gender', '$email', '$selected_dept_id', 0, 0, 0, 0, 0)");
+  $sql = mysqli_query($conn, "INSERT into employee(lname, fname, gender, email, dept)VALUES('$lname','$fname','$gender', '$email', '$selected_dept_id')");
 
   if ($sql) {
     ?>
