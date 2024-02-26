@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2024 at 02:16 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- Generation Time: Feb 26, 2024 at 03:22 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,7 @@ CREATE TABLE `account_info` (
   `total_net_pay` int(11) NOT NULL,
   `start_pay_period` date NOT NULL,
   `end_pay_period` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `account_info`
@@ -46,7 +46,9 @@ CREATE TABLE `account_info` (
 INSERT INTO `account_info` (`acc_info_id`, `employee_id`, `overtime_hours`, `bonus`, `benefits_deduction`, `total_gross_pay`, `total_net_pay`, `start_pay_period`, `end_pay_period`) VALUES
 (1, 15, 2, 300, 1900, 16300, 14400, '2024-02-01', '2024-02-29'),
 (5, 14, 5, 250, 3000, 17750, 14750, '2023-12-01', '2023-12-31'),
-(6, 20, 3, 250, 2850, 16750, 13900, '2024-02-01', '2024-02-29');
+(6, 20, 3, 250, 2850, 16750, 13900, '2024-02-01', '2024-02-29'),
+(7, 29, 6, 1000, 2400, 19000, 16600, '2024-01-01', '2024-01-31'),
+(8, 18, 3, 550, 1650, 17050, 15400, '2024-02-01', '2024-02-29');
 
 -- --------------------------------------------------------
 
@@ -58,7 +60,7 @@ CREATE TABLE `deductions` (
   `deduction_id` int(5) NOT NULL,
   `deduction_name` varchar(100) NOT NULL,
   `deduction_amount` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `deductions`
@@ -79,7 +81,7 @@ INSERT INTO `deductions` (`deduction_id`, `deduction_name`, `deduction_amount`) 
 CREATE TABLE `department` (
   `dept_id` int(11) NOT NULL,
   `dept_name` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `department`
@@ -106,7 +108,7 @@ CREATE TABLE `employee` (
   `gender` varchar(6) NOT NULL,
   `email` varchar(100) NOT NULL,
   `dept` int(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `employee`
@@ -144,7 +146,7 @@ CREATE TABLE `overtime` (
   `ot_id` int(10) NOT NULL,
   `rate` int(10) NOT NULL,
   `none` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `overtime`
@@ -163,7 +165,7 @@ CREATE TABLE `salary` (
   `salary_id` int(10) NOT NULL,
   `salary_rate` int(10) NOT NULL,
   `none` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `salary`
@@ -182,7 +184,7 @@ CREATE TABLE `user` (
   `id` int(5) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `user`
@@ -248,7 +250,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `account_info`
 --
 ALTER TABLE `account_info`
-  MODIFY `acc_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `acc_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `deductions`

@@ -226,7 +226,7 @@ while ($row = mysqli_fetch_array($query)) {
                         <a class="btn btn-primary"
                           href="../view/view_account.php?acc_info_id=<?php echo $row["acc_info_id"]; ?>">Edit</a>
                         <a class="btn btn-danger"
-                          href="../delete/delete_department.php?dept_id=<?php echo $row["dept_id"]; ?>">Delete</a>
+                          href="../delete/delete_income.php?dept_id=<?php echo $row["acc_info_id"]; ?>">Delete</a>
                       </td>
                     </tr>
 
