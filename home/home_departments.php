@@ -12,50 +12,69 @@ while ($row = mysqli_fetch_array($sql)) {
 <html lang="en">
 
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description">
 
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pixel Foundry - Income</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/justified-nav.css" rel="stylesheet">
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/search.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../assets/css/dataTables.min.css">
 
-    <title>Pixel Foundry - Department</title>
-    <link href="../assets/css/justified-nav.css" rel="stylesheet">
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/search.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/dataTables.min.css">
-
+  <style>
+    body {
+      margin-top: -2%;
+    }
+    .navbar {
+        padding: 2%;
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><b>Pixel Foundry</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <div class="container">
-        <div class="masthead">
-            <h3>
-                <b>Pixel Foundry</b><br>
-                Welcome
-                <?php echo $_SESSION['username']; ?>!<br><br>
-                <b><a href="../index.php">Home</a></b>
-                <a data-toggle="modal" href="#colins" class="pull-right"><b>
-                        Logout
-                    </b></a>
-            </h3>
-            <nav>
-                <ul class="nav nav-justified">
-                    <li>
-                        <a href="home_employee.php">Employee</a>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.php">Home</a>
                     </li>
-                    <li class="active">
-                        <a href="">Department</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="home_employee.php">Employee</a>
                     </li>
-                    <li>
-                        <a href="home_deductions.php">Deduction</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="home_departments.php">Department</a>
                     </li>
-                    <li>
-                        <a href="home_salary.php">Income</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="home_deductions.php">Deduction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="home_income.php">Income</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="home_salary.php">Report</a>
                     </li>
                 </ul>
-            </nav>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#colins">Logout</a>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </nav>
+
+    <div class="container">
 
         <br>
         <div class="well bs-component">
@@ -67,7 +86,6 @@ while ($row = mysqli_fetch_array($sql)) {
                     <div class="table-responsive">
                         <form method="post" action="">
                             <table class="table table-bordered table-hover table-condensed" id="myTable">
-                                <!-- <h3><b>Ordinance</b></h3> -->
                                 <thead>
                                     <tr class="info">
                                         <th>
@@ -95,11 +113,7 @@ while ($row = mysqli_fetch_array($sql)) {
                                         ?>
 
                                         <tr>
-                                            <td align="center"><a
-                                                    href="../view/view_department.php?dept_id=<?php echo $row["dept_id"]; ?>"
-                                                    title="Update">
-                                                    <?php echo $row['dept_name'] ?>
-                                                </a></td>
+                                            <td align="center"><?php echo $row['dept_name'] ?></td>
 
                                             <td align="center">
                                                 <a class="btn btn-primary"
@@ -132,10 +146,10 @@ while ($row = mysqli_fetch_array($sql)) {
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header" style="padding:20px 50px;">
+                    <div class="modal-header" style="padding:7px 20px;">
                         <button type="button" class="close" data-dismiss="modal" title="Close">&times;</button>
-                        <h3 align="center"><b>Add Department</b></h3>
                     </div>
+                    <h3 align="center"><b>Add Department</b></h3>
                     <div class="modal-body" style="padding:40px 50px;">
 
                         <form class="form-horizontal" action="#" name="form" method="post">

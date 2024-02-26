@@ -16,12 +16,6 @@ while ($row = mysqli_fetch_array($query1)) {
   $philhealth = $row['deduction_amount'];
 }
 
-$query2 = mysqli_query($conn, "SELECT * from deductions WHERE deduction_id = 2");
-while ($row = mysqli_fetch_array($query2)) {
-  $id = $row['deduction_id'];
-  $BIR = $row['deduction_amount'];
-}
-
 $query3 = mysqli_query($conn, "SELECT * from deductions WHERE deduction_id = 3");
 while ($row = mysqli_fetch_array($query3)) {
   $id = $row['deduction_id'];
@@ -46,89 +40,133 @@ while ($row = mysqli_fetch_array($query5)) {
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description">
 
-  <title>Pixel Foundry - Deductions</title>
-
+  <title>Pixel Foundry - Income</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/css/justified-nav.css" rel="stylesheet">
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/css/search.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../assets/css/dataTables.min.css">
 
+  <style>
+    body {
+      margin-top: -2%;
+    }
+
+    .navbar {
+      padding: 2%;
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"><b>Pixel Foundry</b></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <div class="container">
-    <div class="masthead">
-      <h3>
-        <b>Pixel Foundry</b><br>
-        Welcome
-        <?php echo $_SESSION['username']; ?>!<br><br>
-        <b><a href="../index.php">Home</a></b>
-        <a data-toggle="modal" href="#colins" class="pull-right"><b>
-            Logout
-          </b></a>
-      </h3>
-      <nav>
-        <ul class="nav nav-justified">
-          <li>
-            <a href="home_employee.php">Employee</a>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php">Home</a>
           </li>
-          <li>
-            <a href="home_departments.php">Department</a>
+          <li class="nav-item">
+            <a class="nav-link" href="home_employee.php">Employee</a>
           </li>
-          <li class="active">
-            <a href="">Deduction</a>
+          <li class="nav-item">
+            <a class="nav-link" href="home_departments.php">Department</a>
           </li>
-          <li>
-            <a href="home_salary.php">Income</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="home_deductions.php">Deduction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="home_income.php">Income</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="home_salary.php">Report</a>
           </li>
         </ul>
-      </nav>
-    </div><br><br>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#colins">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    <form class="form-horizontal" action="#" name="form">
-      <div class="form-group">
-        <label class="col-sm-5 control-label">PhilHealth :</label>
-        <div class="col-sm-4">
-          <?php echo $philhealth; ?>.00
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-5 control-label">BIR :</label>
-        <div class="col-sm-4">
-          <?php echo $BIR; ?>.00
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-5 control-label">GSIS :</label>
-        <div class="col-sm-4">
-          <?php echo $GSIS; ?>.00
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-5 control-label">PAG-IBIG :</label>
-        <div class="col-sm-4">
-          <?php echo $PAGIBIG; ?>.00
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-5 control-label">SSS :</label>
-        <div class="col-sm-4">
-          <?php echo $SSS; ?>.00
-        </div>
-      </div>
-      <br><br>
+  <div class="container">
+    <br><br>
 
-      <div class="form-group">
-        <label class="col-sm-5 control-label"><button type="button" data-toggle="modal" data-target="#deductions"
-            class="btn btn-danger">Update</button></label>
-      </div>
-    </form>
+    <div class="well bs-component">
+      <form class="form-horizontal">
+        <fieldset>
+          <button type="button" data-toggle="modal" data-target="#deductions" class="btn btn-success">Update</button>
+          <p align="center"><big><b>List of Benefits</b></big></p>
+          <div class="table-responsive">
+            <form method="post" action="">
+              <table class="table table-bordered table-hover table-condensed" id="myTable">
+                <thead>
+                  <tr class="info">
+                    <th>
+                      <p align="center">Benefit Name</p>
+                    </th>
+                    <th>
+                      <p align="center">Benefit Payment</p>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+
+                  $conn = mysqli_connect('localhost', 'root', '', 'payroll');
+                  if (!$conn) {
+                    die("Database Connection Failed" . mysqli_error());
+                  }
+
+                  $query = mysqli_query($conn, "SELECT * FROM deductions ORDER BY deduction_id ASC") or die(mysqli_error());
+                  while ($row = mysqli_fetch_array($query)) {
+                    $deduction_id = $row['deduction_id'];
+                    $deduction_name = $row['deduction_name'];
+                    $deduction_amount = $row['deduction_amount'];
+                    ?>
+
+                    <tr>
+                      <td align="center">
+                        <?php echo $row['deduction_name'] ?>
+                      </td>
+                      <td align="center">
+                        <?php echo $row['deduction_amount'] ?>
+                      </td>
+                    </tr>
+
+                  <?php } ?>
+                </tbody>
+
+                <tr class="info">
+                  <th>
+                    <p align="center">Benefit Name</p>
+                  </th>
+                  <th>
+                    <p align="center">Benefit Payment</p>
+                  </th>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+
 
     <!-- this modal is for update an DEDUCTIONS -->
     <div class="modal fade" id="deductions" role="dialog">
@@ -136,10 +174,11 @@ while ($row = mysqli_fetch_array($query5)) {
 
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="modal-header" style="padding:20px 50px;">
+          <div class="modal-header" style="padding:7px 20px;">
             <button type="button" class="close" data-dismiss="modal" title="Close">&times;</button>
-            <h3 align="center"><b>Deduction</b></h3>
           </div>
+          <h3 align="center"><b>Deduction</b></h3>
+
           <div class="modal-body" style="padding:40px 50px;">
 
             <form class="form-horizontal" action="../add/add_deductions.php" name="form" method="post">
@@ -148,12 +187,6 @@ while ($row = mysqli_fetch_array($query5)) {
                 <div class="col-sm-8">
                   <input type="text" name="philhealth" class="form-control" required="required"
                     value="<?php echo $philhealth; ?>">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-4 control-label">BIR</label>
-                <div class="col-sm-8">
-                  <input type="text" name="bir" class="form-control" value="<?php echo $BIR; ?>" required="required">
                 </div>
               </div>
               <div class="form-group">
@@ -217,7 +250,6 @@ while ($row = mysqli_fetch_array($query5)) {
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="../assets/js/jquery.min.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
-  <!-- <script src="assets/js/docs.min.js"></script> -->
   <script src="../assets/js/search.js"></script>
   <script type="text/javascript" charset="utf-8" language="javascript" src="../assets/js/dataTables.min.js"></script>
 

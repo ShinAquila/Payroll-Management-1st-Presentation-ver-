@@ -2,33 +2,8 @@
 include("../db.php"); //include auth.php file on all secure pages
 include("../auth.php");
 
-$conn = mysqli_connect('localhost', 'root', '', 'payroll');
-if (!$conn) {
-  die("Database Connection Failed" . mysqli_error());
-}
-
-$query1 = mysqli_query($conn, "SELECT * from deductions WHERE deduction_id = 1");
-while ($row = mysqli_fetch_array($query1)) {
-  $id = $row['deduction_id'];
-  $philhealth = $row['deduction_amount'];
-}
-
-$query3 = mysqli_query($conn, "SELECT * from deductions WHERE deduction_id = 3");
-while ($row = mysqli_fetch_array($query3)) {
-  $id = $row['deduction_id'];
-  $GSIS = $row['deduction_amount'];
-}
-
-$query4 = mysqli_query($conn, "SELECT * from deductions WHERE deduction_id = 4");
-while ($row = mysqli_fetch_array($query4)) {
-  $id = $row['deduction_id'];
-  $PAGIBIG = $row['deduction_amount'];
-}
-
-$query5 = mysqli_query($conn, "SELECT * from deductions WHERE deduction_id = 5");
-while ($row = mysqli_fetch_array($query5)) {
-  $id = $row['deduction_id'];
-  $SSS = $row['deduction_amount'];
+$sql = mysqli_query($c, "SELECT * FROM deductions");
+while ($row = mysqli_fetch_array($sql)) {
 }
 ?>
 
@@ -54,6 +29,7 @@ while ($row = mysqli_fetch_array($query5)) {
     }
 
     .navbar {
+      padding: 2%;
       width: 100%;
     }
   </style>
@@ -82,10 +58,10 @@ while ($row = mysqli_fetch_array($query5)) {
           <li class="nav-item">
             <a class="nav-link" href="home_deductions.php">Deduction</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="home_income.php">Income</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="home_salary.php">Report</a>
           </li>
         </ul>
@@ -101,37 +77,18 @@ while ($row = mysqli_fetch_array($query5)) {
   <div class="container">
     <br><br>
 
-
-
     <?php
     $id = $_REQUEST['acc_info_id'];
-    $query = "SELECT * FROM account_info JOIN employee ON account_info.employee_id = employee.emp_id WHERE acc_info_id='" . $id . "'";
+    $query = "SELECT * FROM account_info WHERE acc_info_id='" . $id . "'";
     $result = mysqli_query($c, $query) or die(mysqli_error());
 
-    $query_deductions = mysqli_query($c, "SELECT * FROM deductions");
-    $row_deductions = mysqli_fetch_assoc($query_deductions);
-
-    $query = mysqli_query($c, "SELECT * from overtime");
-    while ($row = mysqli_fetch_array($query)) {
-      $rate = $row['rate'];
-    }
-
-    $query = mysqli_query($c, "SELECT * from salary");
-    while ($row = mysqli_fetch_array($query)) {
-      $salary = $row['salary_rate'];
-    }
-
     while ($row = mysqli_fetch_assoc($result)) {
-      $overtime_hours = $row['overtime_hours'] * $rate;
-      $bonus = $row['bonus'];
-      $benefits_deduction = $row['benefits_deduction'];
-      $income = $overtime_hours + $bonus + $salary;
-      $netpay = $income - $benefits_deduction;
+
       ?>
 
-      <form class="form-horizontal" action="../update/update_account.php" method="post" name="form">
+      <form class="form-horizontal" action="../update/update_employee.php" method="post" name="form">
         <input type="hidden" name="new" value="1" />
-        <input name="id" type="hidden" value="<?php echo $row['acc_info_id']; ?>" />
+        <input name="id" type="hidden" value="<?php echo $row['emp_id']; ?>" />
         <div class="form-group">
           <label class="col-sm-5 control-label"></label>
           <div class="col-sm-4">
@@ -142,55 +99,69 @@ while ($row = mysqli_fetch_array($query5)) {
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-5 control-label">Deductions:</label>
+          <label class="col-sm-5 control-label">Last Name :</label>
           <div class="col-sm-4">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" name="benefits_deduction[]"
-                value="<?php echo $philhealth; ?>" >
-              <label class="form-check-label" for="deduction_philhealth" style="padding-left:6%">PhilHealth</label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" name="benefits_deduction[]" value="<?php echo $GSIS; ?>"
-                >
-              <label class="form-check-label" for="deduction_gsis" style="padding-left:6%">GSIS</label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" name="benefits_deduction[]" value="<?php echo $PAGIBIG; ?>"
-                >
-              <label class="form-check-label" for="deduction_pagibig" style="padding-left:6%">PAG-IBIG</label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" name="benefits_deduction[]" value="<?php echo $SSS; ?>"
-                >
-              <label class="form-check-label" for="deduction_pagibig" style="padding-left:6%">SSS</label>
-            </div>
+            <input type="text" name="lname" class="form-control" value="<?php echo $row['lname']; ?>" required="required">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-5 control-label">Overtime :</label>
+          <label class="col-sm-5 control-label">First Name :</label>
           <div class="col-sm-4">
-            <input type="text" name="overtime" class="form-control" value="<?php echo $row['overtime_hours']; ?>"
-              required="required">
+            <input type="text" name="fname" class="form-control" value="<?php echo $row['fname']; ?>" required="required">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-5 control-label">Bonus :</label>
+          <label class="col-sm-5 control-label">Gender :</label>
           <div class="col-sm-4">
-            <input type="text" name="bonus" class="form-control" value="<?php echo $row['bonus']; ?>" required="required">
+            <select name="gender" class="form-control" required>
+              <option value="<?php echo $row['gender']; ?>">
+                <?php echo $row['gender']; ?>
+              </option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
-        </div><br><br>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Email :</label>
+          <div class="col-sm-4">
+            <input type="text" name="email" class="form-control" value="<?php echo $row['email']; ?>" required="required">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Department :</label>
+          <div class="col-sm-4">
+            <select name="department" class="form-control" placeholder="Department" required>
+              <option value="">Department</option>
 
-        <div class="form-group">
-          <label class="col-sm-5 control-label">Current Netpay :</label>
-          <div class="col-sm-4">
-            <?php echo $netpay; ?>.00
+              <?php
+              require_once('../db.php');
+
+              $sql = "SELECT dept_id, dept_name FROM department";
+              $result = mysqli_query($c, $sql);
+
+              if (!$result) {
+                die("Error fetching departments: " . mysqli_error($c));
+              }
+
+              while ($row = mysqli_fetch_assoc($result)) {
+                echo "<option value='" . $row['dept_id'] . "'>" . $row['dept_name'] . "</option>";
+              }
+
+              mysqli_close($c);
+              ?>
+
+            </select>
           </div>
-        </div><br><br>
+        </div>
+        <br><br>
+
         <div class="form-group">
           <label class="col-sm-5 control-label"></label>
           <div class="col-sm-4">
             <input type="submit" name="submit" value="Update" class="btn btn-danger">
-            <a href="../home/home_income.php" class="btn btn-primary">Cancel</a>
+            <a href="../home/home_employee.php" class="btn btn-primary">Cancel</a>
           </div>
         </div>
       </form>

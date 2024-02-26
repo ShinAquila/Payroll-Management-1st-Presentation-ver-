@@ -53,10 +53,10 @@ while ($row = mysqli_fetch_array($sql)) {
                     <li class="nav-item">
                         <a class="nav-link" href="home_employee.php">Employee</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="home_departments.php">Department</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="home_deductions.php">Deduction</a>
                     </li>
                     <li class="nav-item">
