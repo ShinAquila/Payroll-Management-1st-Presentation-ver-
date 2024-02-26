@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2024 at 03:22 AM
+-- Generation Time: Feb 26, 2024 at 09:27 AM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -59,18 +59,19 @@ INSERT INTO `account_info` (`acc_info_id`, `employee_id`, `overtime_hours`, `bon
 CREATE TABLE `deductions` (
   `deduction_id` int(5) NOT NULL,
   `deduction_name` varchar(100) NOT NULL,
-  `deduction_amount` int(50) NOT NULL
+  `deduction_amount` int(50) NOT NULL,
+  `deduction_percent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `deductions`
 --
 
-INSERT INTO `deductions` (`deduction_id`, `deduction_name`, `deduction_amount`) VALUES
-(1, 'philhealth', 750),
-(3, 'GSIS', 1350),
-(4, 'PAGIBIG', 300),
-(5, 'SSS', 2100);
+INSERT INTO `deductions` (`deduction_id`, `deduction_name`, `deduction_amount`, `deduction_percent`) VALUES
+(1, 'PHILHEALTH', 750, 0),
+(3, 'GSIS', 1350, 0),
+(4, 'PAGIBIG', 300, 0),
+(5, 'SSS', 2100, 0);
 
 -- --------------------------------------------------------
 
@@ -88,6 +89,7 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`dept_id`, `dept_name`) VALUES
+(0, 'NOT SET'),
 (2, 'UX Designer'),
 (7, 'Software Developer'),
 (8, 'Mobile Developer'),
@@ -123,7 +125,7 @@ INSERT INTO `employee` (`emp_id`, `lname`, `fname`, `gender`, `email`, `dept`) V
 (14, 'Bueno', 'Kyll John', 'Male', 'bueno@gmail.com', 2),
 (15, 'Albarracin', 'Brent', 'Male', 'albarracin@gmail.com', 10),
 (17, 'Rivera', 'Vincent Ace', 'Male', 'ace@gmail.com', 9),
-(18, 'Cardo', 'Dalisay', 'Male', 'CardoDali@gmail.com', 2),
+(18, 'Cardo', 'Dalisay', 'Male', 'CardoDali@gmail.com', 0),
 (19, 'Sy', 'Leisha', 'Female', 'Leishy@gmail.com', 10),
 (20, 'Hens', 'Kelra', 'Male', 'KelraHel@gmail.com', 8),
 (21, 'Max', 'Lisha', 'Female', 'Lishamax@gmail.com', 2),
@@ -134,7 +136,8 @@ INSERT INTO `employee` (`emp_id`, `lname`, `fname`, `gender`, `email`, `dept`) V
 (27, 'Corn', 'Dog', 'Other', 'corndog@gmail.com', 10),
 (28, 'Rojin', 'Carl', 'Male', 'carlrojin@gmail.com', 11),
 (29, 'Hoshino', 'Ai', 'Female', 'hoshino@gmail.com', 2),
-(31, 'Penduko', 'Pedro', 'Male', 'penduko@gmail.com', 8);
+(31, 'Penduko', 'Pedro', 'Male', 'penduko@gmail.com', 8),
+(32, 'Bravo', 'Johnny', 'Male', 'fafa@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -262,13 +265,13 @@ ALTER TABLE `deductions`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `emp_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `emp_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `overtime`
