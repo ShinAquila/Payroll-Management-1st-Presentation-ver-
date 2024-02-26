@@ -108,7 +108,7 @@ if (!$conn) {
           </div>
           <div class="modal-body" style="padding:40px 50px;">
             <div align="center">
-              <a href="../logout.php" class="btn btn-block btn-danger">Logout</a>
+              <a href="logout.php" class="btn btn-block btn-danger">Logout</a>
             </div>
           </div>
         </div>
