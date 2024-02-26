@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2024 at 04:53 AM
+-- Generation Time: Feb 26, 2024 at 02:16 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -24,6 +24,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `account_info`
+--
+
+CREATE TABLE `account_info` (
+  `acc_info_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `overtime_hours` int(11) NOT NULL,
+  `bonus` int(11) NOT NULL,
+  `benefits_deduction` int(11) NOT NULL,
+  `total_gross_pay` int(11) NOT NULL,
+  `total_net_pay` int(11) NOT NULL,
+  `start_pay_period` date NOT NULL,
+  `end_pay_period` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `account_info`
+--
+
+INSERT INTO `account_info` (`acc_info_id`, `employee_id`, `overtime_hours`, `bonus`, `benefits_deduction`, `total_gross_pay`, `total_net_pay`, `start_pay_period`, `end_pay_period`) VALUES
+(1, 15, 2, 300, 1900, 16300, 14400, '2024-02-01', '2024-02-29'),
+(5, 14, 5, 250, 3000, 17750, 14750, '2023-12-01', '2023-12-31'),
+(6, 20, 3, 250, 2850, 16750, 13900, '2024-02-01', '2024-02-29');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `deductions`
 --
 
@@ -38,11 +65,10 @@ CREATE TABLE `deductions` (
 --
 
 INSERT INTO `deductions` (`deduction_id`, `deduction_name`, `deduction_amount`) VALUES
-(1, 'philhealth', 450),
-(2, 'BIR', 500),
-(3, 'GSIS', 810),
-(4, 'PAGIBIG', 180),
-(5, 'SSS', 1260);
+(1, 'philhealth', 750),
+(3, 'GSIS', 1350),
+(4, 'PAGIBIG', 300),
+(5, 'SSS', 2100);
 
 -- --------------------------------------------------------
 
@@ -79,39 +105,34 @@ CREATE TABLE `employee` (
   `fname` varchar(20) NOT NULL,
   `gender` varchar(6) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `dept` int(30) NOT NULL,
-  `deduction` int(10) NOT NULL,
-  `overtime_hours` int(10) NOT NULL,
-  `bonus` int(10) NOT NULL,
-  `total_gross_pay` int(100) NOT NULL,
-  `total_net_pay` int(100) NOT NULL
+  `dept` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`emp_id`, `lname`, `fname`, `gender`, `email`, `dept`, `deduction`, `overtime_hours`, `bonus`, `total_gross_pay`, `total_net_pay`) VALUES
-(6, 'Sabit', 'Jessa', 'Female', 'sabit@gmail.com', 7, 600, 2, 200, 9800, 9200),
-(8, 'Pasadas', 'Renz', 'Male', 'pasadas@gmail.com', 10, 600, 3, 5000, 14900, 14300),
-(9, 'Maglangit', 'Karen', 'Female', 'maglangit@gmail.com', 11, 650, 6, 2000, 12800, 12150),
-(11, 'Leonida', 'Fritzie Apple', 'Male', 'leonida@gmail.com', 2, 950, 3, 50, 9950, 9000),
-(13, 'Corpuz', 'Allan', 'Male', 'corpuz@gmail.com', 10, 1820, 4, 600, 10800, 8980),
-(14, 'Bueno', 'Kyll John', 'Male', 'bueno@gmail.com', 2, 900, 7, 400, 11500, 10600),
-(15, 'Albarracin', 'Brent', 'Male', 'albarracin@gmail.com', 10, 1170, 1, 1000, 10300, 9130),
-(17, 'Rivera', 'Vincent Ace', 'Male', 'ace@gmail.com', 9, 1250, 3, 600, 10500, 9250),
-(18, 'Cardo', 'Dalisay', 'Male', 'CardoDali@gmail.com', 2, 1820, 2, 200, 9800, 7980),
-(19, 'Sy', 'Leisha', 'Female', 'Leishy@gmail.com', 10, 1820, 3, 500, 10400, 8580),
-(20, 'Hens', 'Kelra', 'Male', 'KelraHel@gmail.com', 8, 1820, 6, 800, 11600, 9780),
-(21, 'Max', 'Lisha', 'Female', 'Lishamax@gmail.com', 2, 1820, 3, 500, 10400, 8580),
-(22, 'Pacquaio', 'Manny', 'Male', 'pacman@gmail.com', 2, 1170, 3, 300, 10200, 9030),
-(23, 'Tate', 'Lesley', 'Female', 'LesleyTate@gmail.com', 11, 1370, 4, 600, 10800, 9430),
-(24, 'Donut', 'Boi', 'Male', 'Nadonut@gmail.com', 8, 870, 3, 500, 10400, 9530),
-(25, 'Lazada', 'Renz', 'Male', 'renzshopping@gmail.com', 8, 1820, 1, 300, 9600, 7780),
-(27, 'Corn', 'Dog', 'Other', 'corndog@gmail.com', 10, 1470, 3, 700, 10600, 9130),
-(28, 'Rojin', 'Carl', 'Male', 'carlrojin@gmail.com', 11, 1820, 8, 2500, 13900, 12080),
-(29, 'Hoshino', 'Ai', 'Female', 'hoshino@gmail.com', 2, 1820, 7, 2000, 13100, 11280),
-(31, 'Penduko', 'Pedro', 'Male', 'penduko@gmail.com', 8, 1470, 6, 1000, 11800, 10330);
+INSERT INTO `employee` (`emp_id`, `lname`, `fname`, `gender`, `email`, `dept`) VALUES
+(6, 'Sabit', 'Jessa', 'Female', 'sabit@gmail.com', 7),
+(8, 'Pasadas', 'Renz', 'Male', 'pasadas@gmail.com', 10),
+(9, 'Maglangit', 'Karen', 'Female', 'maglangit@gmail.com', 11),
+(11, 'Leonida', 'Fritzie Apple', 'Male', 'leonida@gmail.com', 2),
+(13, 'Corpuz', 'Allan', 'Male', 'corpuz@gmail.com', 10),
+(14, 'Bueno', 'Kyll John', 'Male', 'bueno@gmail.com', 2),
+(15, 'Albarracin', 'Brent', 'Male', 'albarracin@gmail.com', 10),
+(17, 'Rivera', 'Vincent Ace', 'Male', 'ace@gmail.com', 9),
+(18, 'Cardo', 'Dalisay', 'Male', 'CardoDali@gmail.com', 2),
+(19, 'Sy', 'Leisha', 'Female', 'Leishy@gmail.com', 10),
+(20, 'Hens', 'Kelra', 'Male', 'KelraHel@gmail.com', 8),
+(21, 'Max', 'Lisha', 'Female', 'Lishamax@gmail.com', 2),
+(22, 'Pacquaio', 'Manny', 'Male', 'pacman@gmail.com', 2),
+(23, 'Tate', 'Lesley', 'Female', 'LesleyTate@gmail.com', 11),
+(24, 'Donut', 'Boi', 'Male', 'Nadonut@gmail.com', 8),
+(25, 'Lazada', 'Renz', 'Male', 'renzshopping@gmail.com', 8),
+(27, 'Corn', 'Dog', 'Other', 'corndog@gmail.com', 10),
+(28, 'Rojin', 'Carl', 'Male', 'carlrojin@gmail.com', 11),
+(29, 'Hoshino', 'Ai', 'Female', 'hoshino@gmail.com', 2),
+(31, 'Penduko', 'Pedro', 'Male', 'penduko@gmail.com', 8);
 
 -- --------------------------------------------------------
 
@@ -130,7 +151,7 @@ CREATE TABLE `overtime` (
 --
 
 INSERT INTO `overtime` (`ot_id`, `rate`, `none`) VALUES
-(1, 300, 0);
+(1, 500, 0);
 
 -- --------------------------------------------------------
 
@@ -149,7 +170,7 @@ CREATE TABLE `salary` (
 --
 
 INSERT INTO `salary` (`salary_id`, `salary_rate`, `none`) VALUES
-(1, 9000, 0);
+(1, 15000, 0);
 
 -- --------------------------------------------------------
 
@@ -174,6 +195,13 @@ INSERT INTO `user` (`id`, `username`, `password`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `account_info`
+--
+ALTER TABLE `account_info`
+  ADD PRIMARY KEY (`acc_info_id`),
+  ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `deductions`
@@ -217,6 +245,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `account_info`
+--
+ALTER TABLE `account_info`
+  MODIFY `acc_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `deductions`
 --
 ALTER TABLE `deductions`
@@ -255,6 +289,12 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `account_info`
+--
+ALTER TABLE `account_info`
+  ADD CONSTRAINT `account_info_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`emp_id`);
 
 --
 -- Constraints for table `employee`
