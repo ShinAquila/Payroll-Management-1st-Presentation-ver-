@@ -133,7 +133,6 @@ while ($row = mysqli_fetch_array($sql)) {
           <label class="col-sm-5 control-label">Department :</label>
           <div class="col-sm-4">
             <select name="department" class="form-control" placeholder="Department" required>
-              <option value="">Department</option>
 
               <?php
               require_once('../db.php');

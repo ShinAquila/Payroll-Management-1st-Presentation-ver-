@@ -120,7 +120,7 @@ while ($row = mysqli_fetch_array($query5)) {
                       <p align="center">Benefit Name</p>
                     </th>
                     <th>
-                      <p align="center">Benefit Payment</p>
+                      <p align="center">Benefit Percent</p>
                     </th>
                   </tr>
                 </thead>
@@ -137,14 +137,15 @@ while ($row = mysqli_fetch_array($query5)) {
                     $deduction_id = $row['deduction_id'];
                     $deduction_name = $row['deduction_name'];
                     $deduction_amount = $row['deduction_amount'];
+                    $deduction_percent = $row['deduction_percent'];
                     ?>
 
                     <tr>
                       <td align="center">
-                        <?php echo $row['deduction_name'] ?>
+                        <?php echo $deduction_name ?>%
                       </td>
                       <td align="center">
-                        <?php echo $row['deduction_amount'] ?>
+                        <?php echo $deduction_percent ?>%
                       </td>
                     </tr>
 
@@ -156,7 +157,7 @@ while ($row = mysqli_fetch_array($query5)) {
                     <p align="center">Benefit Name</p>
                   </th>
                   <th>
-                    <p align="center">Benefit Payment</p>
+                    <p align="center">Benefit Percent</p>
                   </th>
                 </tr>
               </table>

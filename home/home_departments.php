@@ -107,7 +107,7 @@ while ($row = mysqli_fetch_array($sql)) {
 
 
 
-                                    $query = mysqli_query($conn, "select * from department ORDER BY dept_id asc") or die(mysqli_error());
+                                    $query = mysqli_query($conn, "SELECT * from department WHERE NOT dept_id=0 ORDER BY dept_id asc  ") or die(mysqli_error());
                                     while ($row = mysqli_fetch_array($query)) {
                                         $dept_id = $row['dept_id'];
                                         $dept_name = $row['dept_name'];

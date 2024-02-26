@@ -25,11 +25,21 @@ while ($row = mysqli_fetch_assoc($account_query)) {
 		exit;
 	}
 }
+$philhealth_query = mysqli_query($c, "SELECT * FROM deductions WHERE deduction_id='1'");
+$philhealth_row = mysqli_fetch_assoc($philhealth_query);
+$philhealth = $salary * ($philhealth_row['deduction_percent'] / 100);
 
-$philhealth = $salary * 0.05;
-$GSIS = $salary * 0.09;
-$PAGIBIG = $salary * 0.02;
-$SSS = $salary * 0.14;
+$gsis_query = mysqli_query($c, "SELECT * FROM deductions WHERE deduction_id='3'");
+$gsis_row = mysqli_fetch_assoc($gsis_query);
+$GSIS = $salary * ($gsis_row['deduction_percent'] / 100);
+
+$pagibig_query = mysqli_query($c, "SELECT * FROM deductions WHERE deduction_id='4'");
+$pagibig_row = mysqli_fetch_assoc($pagibig_query);
+$PAGIBIG = $salary * ($pagibig_row['deduction_percent'] / 100);
+
+$sss_query = mysqli_query($c, "SELECT * FROM deductions WHERE deduction_id='5'");
+$sss_row = mysqli_fetch_assoc($sss_query);
+$SSS = $salary * ($sss_row['deduction_percent'] / 100);
 
 $sql_philhealth = mysqli_query($c, "UPDATE deductions SET deduction_amount='$philhealth' WHERE deduction_id='1'");
 $sql_gsis = mysqli_query($c, "UPDATE deductions SET deduction_amount='$GSIS' WHERE deduction_id='3'");
